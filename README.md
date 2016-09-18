@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a python based script that will automate the recovery of an unreachable ARM Linux VM in Azure. This script aims to automate the follow:
+This is a python based script that will automate the recovery of an unreachable ARM Linux VM in Azure. This script aims to automate the following:
 
 1. Shutting down your VM
 2. Deleting the VM to free the disks leased to it

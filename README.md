@@ -14,7 +14,7 @@ This is a python based script that will automate the recovery of an unreachable 
 * This only works with ARM (Azure Resource Manager | V2) Linux VMs
 * This is tested with Python 2.7.x
 * You will need adminstrator privileges for the subscription
-* MFA authentication <strong>is not supported</support>
+* MFA authentication <strong>is not supported</strong>
 
 ## Disclaimer
 

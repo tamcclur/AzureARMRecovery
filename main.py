@@ -1,6 +1,5 @@
 #!/usr/env/python
 
-from azure.mgmt.authorization import AuthorizationManagementClient, AuthorizationManagementClientConfiguration
 from azure.common.credentials import UserPassCredentials
 from azure.mgmt.resource.resources import ResourceManagementClient, ResourceManagementClientConfiguration
 from azure.mgmt.resource.resources.models import ResourceGroup

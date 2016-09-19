@@ -1,14 +1,14 @@
 #!/usr/env/python
 
 from azure.common.credentials import UserPassCredentials
-from azure.mgmt.resource.resources import ResourceManagementClient, ResourceManagementClientConfiguration
+from azure.mgmt.resource.resources import ResourceManagementClient
 from azure.mgmt.resource.resources.models import ResourceGroup
-from azure.mgmt.compute import ComputeManagementClient, ComputeManagementClientConfiguration
+from azure.mgmt.compute import ComputeManagementClient
 from azure.mgmt.compute.models import VirtualMachine, HardwareProfile, VirtualMachineSizeTypes, NetworkProfile, NetworkInterfaceReference, StorageProfile, OSDisk, DataDisk, CachingTypes, VirtualHardDisk, DiskCreateOptionTypes, ImageReference, OSProfile
-from azure.mgmt.network import NetworkManagementClient, NetworkManagementClientConfiguration
+from azure.mgmt.network import NetworkManagementClient
 from azure.mgmt.network.models import VirtualNetwork, Subnet, AddressSpace, PublicIPAddress, IPAllocationMethod, NetworkInterface, NetworkInterfaceIPConfiguration
-from azure.mgmt.storage import StorageManagementClient, StorageManagementClientConfiguration
-from azure.mgmt.storage.models import StorageAccountCreateParameters, AccountType
+from azure.mgmt.storage import StorageManagementClient
+from azure.mgmt.storage.models import StorageAccountCreateParameters, Kind, Sku, SkuName
 import random
 import getpass
 import os
@@ -34,16 +34,16 @@ credentials = UserPassCredentials(
 )
 
 # Defining configuration for connecting Clients
-res_config = ResourceManagementClientConfiguration(credentials, subscription_id)
-storage_config = StorageManagementClientConfiguration(credentials, subscription_id)
-compute_config = ComputeManagementClientConfiguration(credentials, subscription_id)
-network_config = NetworkManagementClientConfiguration(credentials, subscription_id)
+#res_config = ResourceManagementClientConfiguration(credentials, subscription_id)
+#storage_config = StorageManagementClientConfiguration(credentials, subscription_id)
+#compute_config = ComputeManagementClientConfiguration(credentials, subscription_id)
+#network_config = NetworkManagementClientConfiguration(credentials, subscription_id)
 
 # Defining Connecting Clients
-res_client = ResourceManagementClient(res_config)
-storage_client = StorageManagementClient(storage_config)
-compute_client = ComputeManagementClient(compute_config)
-network_client = NetworkManagementClient(network_config)
+res_client = ResourceManagementClient(credentials, subscription_id)
+storage_client = StorageManagementClient(credentials, subscription_id)
+compute_client = ComputeManagementClient(credentials, subscription_id)
+network_client = NetworkManagementClient(credentials, subscription_id)
 
 def vm_info():
     # Gather vm's information
@@ -51,7 +51,7 @@ def vm_info():
     # OS Disk vhd
     os_vhd = orig_vm.storage_profile.os_disk.vhd.uri
     # VM size
-    vm_size = orig_vm.hardware_profile.vm_size.name
+    vm_size = orig_vm.hardware_profile.vm_size
     # Storage Account Name
     store_account = re.split('/|\.', orig_vm.storage_profile.os_disk.vhd.uri)[2]
     # Location
@@ -226,9 +226,11 @@ def temp_vm():
         storage_name,
         StorageAccountCreateParameters(
             location=region,
-            account_type=AccountType.premium_lrs,
+	    sku=Sku(SkuName.premium_lrs),
+            kind=Kind.storage,
         ),
     )
+    result.result()
 
     # 3. Create the network interface using a helper function (defined below)
     nic_id = create_network_interface(

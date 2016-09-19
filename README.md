@@ -20,6 +20,7 @@ This is a python based script that will automate the recovery of an unreachable 
 ## Disclaimer
 
 <strong>This will start a Standard_DS1_v2 VM in a resource group. Please be aware this will incur minor charges.</strong>
+Please also note this build is <strong>extremely</strong> experimental and has only been tested with a limited range of environments. I also do not have local error checking/validation, only Azure SDK errors.
 
 ## Usage
 

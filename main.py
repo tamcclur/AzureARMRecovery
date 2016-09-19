@@ -33,12 +33,6 @@ credentials = UserPassCredentials(
     userPass,
 )
 
-# Defining configuration for connecting Clients
-#res_config = ResourceManagementClientConfiguration(credentials, subscription_id)
-#storage_config = StorageManagementClientConfiguration(credentials, subscription_id)
-#compute_config = ComputeManagementClientConfiguration(credentials, subscription_id)
-#network_config = NetworkManagementClientConfiguration(credentials, subscription_id)
-
 # Defining Connecting Clients
 res_client = ResourceManagementClient(credentials, subscription_id)
 storage_client = StorageManagementClient(credentials, subscription_id)

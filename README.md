@@ -36,7 +36,7 @@ Run the script as follows
 
 `python main.py <subscription_id> <resource_group_name> <vm_name>`
 
-The script will then as you to authenticate with your AD username and password. After authenticating the script will go to work and output the SSH details of the new rescue VM.
+The script will then ask you to authenticate with your AD username and password. After authenticating the script will go to work and output the SSH details of the new rescue VM.
 
 SSH to the rescue VM and `lsblk` to see your OS disk attached at `/dev/sdc`
 
